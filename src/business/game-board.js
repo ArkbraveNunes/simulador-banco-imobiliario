@@ -18,12 +18,6 @@ module.exports = class GameBoard {
   }
 
   playDice() {
-    /*
-        No começo da sua vez, o jogador joga um
-        dado equiprovável de 6 faces que determina
-        quantas espaços no tabuleiro o jogador vai
-        andar.
-*/
     return BusinessUtils.getRandomInt(1, 6)
   }
 
@@ -39,10 +33,6 @@ module.exports = class GameBoard {
   walk(player, _dice = null) {
     let goToPosition = player.position + (_dice || this.playDice())
     if (goToPosition >= 20) {
-      /*
-            Ao completar uma volta no tabuleiro,
-            o jogador ganha 100 de saldo.
-*/
       player.money += 100
       goToPosition -= 20
     }
@@ -51,12 +41,6 @@ module.exports = class GameBoard {
   }
 
   checkWinner(player) {
-    /*
-        Termina quando restar somente um jogador
-        com saldo positivo, a qualquer momento da
-        partida. Esse jogador é declarado o
-        vencedor.
-*/
     if (this.players.length === 1) {
       return player
     }
@@ -88,12 +72,6 @@ module.exports = class GameBoard {
   }
 
   play(player, board) {
-    /*
-        Um jogador que fica com saldo negativo
-        perde o jogo, e não joga mais. Perde
-        suas propriedades e portanto podem ser
-        compradas por qualquer outro jogador.
-*/
     if (player.money <= 0) {
       player.gameOver = true
       return
